@@ -26,6 +26,7 @@ Route::resource('/users', 'UsersController');
 Route::resource('/comments', 'CommentsController');
 Route::resource('/events', 'EventsController');
 Route::resource('/tasks', 'TasksController');
+Route::resource('/budget', 'BudgetsController');
 
 Route::get('/wall', 'WallsController@index');
 
