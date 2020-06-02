@@ -20,6 +20,9 @@ class CreateEventsTable extends Migration
             $table->dateTime('data_event')->nullable();
             $table->string('file')->nullable();
             $table->decimal('budget')->nullable();
+            $table->string('title');
+            $table->date('start_date');
+            $table->date('end_date');
             $table->timestamps();
         });
     }

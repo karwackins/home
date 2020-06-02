@@ -21,7 +21,7 @@ class DatabaseSeeder extends Seeder
         $number_of_users = 2;
 //        $number_of_posts = 20;
 //        $number_of_comments = 5;
-        $number_of_events = 10;
+        $number_of_events = 5;
         $number_of_tasks = 10;
         $pass = 'pass';
         //------------------------------------------------
@@ -48,8 +48,12 @@ class DatabaseSeeder extends Seeder
                     'content' => $faker->paragraph(2,true),
                     'user_id' => $faker->numberBetween(1, $number_of_users),
                     'data_event' => $faker->dateTimeThisYear(now()),
-                    'created_at' => $faker->dateTime(now())
+                    'created_at' => $faker->dateTime(now()),
+                    'title'=>'Demo Event-'.$event,
+                    'start_date'=>$faker->dateTimeThisYear(now()),
+                    'end_date'=>$faker->dateTimeThisYear(now())
                 ]);
+
             }
         }
 }

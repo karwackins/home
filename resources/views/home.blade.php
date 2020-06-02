@@ -11,19 +11,12 @@
                 <button class="btn btn-dark-green" data-toggle="modal" data-target="#eventModal" id="note_toggle">Dodaj notatkę</button>
             </div>
 
-            <div class="row">
-                    <div id="event" class="col-md-7">
-                        @include('events.show')
-                        <br>
-                        @foreach($events as $event)
-                            @include('events/include/single')
-                            <br>
-                        @endforeach
-                    </div>
+            <div class="row mt-3">
+                <div id="calendar" class="col-md-7">
+                    @include('fullcalender')
+                </div>
                     <div id="task" class="col-md-5">
                         @include('tasks.show')
-                        <br>
-                        @include('stats.show')
                     </div>
             </div>
 <!- ------------------------Modale---------------------->

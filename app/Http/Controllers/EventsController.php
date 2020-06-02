@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Comment;
 use App\Friend;
+use MaddHatter\LaravelFullcalendar\Facades\Calendar;
 use App\Event;
 use App\User;
 use Illuminate\Http\Request;
@@ -25,10 +26,7 @@ class EventsController extends Controller
      */
     public function index()
     {
-        $user = User::findOrFail(Auth::id());
 
-        $events= Event::with('comments')->where('user_id', $user->id)->orderBy('created_at', 'desc')->paginate(10);
-        return view('users.show', compact('user','events'));
     }
 
     /**
@@ -58,10 +56,13 @@ class EventsController extends Controller
 
         Event::create([
             'user_id' => Auth::id(),
+            'title' => $request->event_title,
             'content' => $request->event_content,
             'file' => $request->file,
             'budget' => $request->budget,
             'data_event' => $request->data_event,
+            'start_date' => $request->start_date,
+            'end_date' => $request->end_date,
         ]);
         return back();
     }
@@ -117,5 +118,29 @@ class EventsController extends Controller
     {
         Event::where('id',$id)->delete();
         return back();
+    }
+
+    static function calender()
+    {
+        $events = [];
+        $data = Event::all();
+        if($data->count()) {
+            foreach ($data as $key => $value) {
+                $events[] = Calendar::event(
+                    $value->title,
+                    true,
+                    new \DateTime($value->start_date),
+                    new \DateTime($value->end_date.' +1 day'),
+                    null,
+                    // Add color and link on event
+                    [
+                        'color' => '#f05050',
+                        'url' => 'pass here url and any route',
+                    ]
+                );
+            }
+        }
+        return $calendar = Calendar::addEvents($events);
+//        return view('fullcalender', compact('calendar'));
     }
 }

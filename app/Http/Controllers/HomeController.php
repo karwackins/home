@@ -7,6 +7,7 @@ use App\Task;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use MaddHatter\LaravelFullcalendar\Facades\Calendar;
 
 class HomeController extends Controller
 {
@@ -36,6 +37,9 @@ class HomeController extends Controller
 //        $events_2 = Event::whereBetween ('data_event', [date('Y-m-d H:i:s'), date('Y-m-d H:i:s',strtotime("+5 day"))])->orderBy('created_at', 'desc')->get();
         $tasks = Task::where ('date_task', '<=', date('Y-m-d H:i:s'))->where('status','=',0)->orderBy('priority', 'desc')->get();
         $tasksDone = Task::where ('updated_at', 'like', date('Y-m-d').'%')->where('status','=',1)->get();
-        return view('home', compact('user', 'posts', 'events','eventsHot', 'tasks', 'tasksDone'));
+
+        $calendar = EventsController::calender();
+
+        return view('home', compact('user', 'posts', 'events','eventsHot', 'tasks', 'tasksDone', 'calendar'));
     }
 }
