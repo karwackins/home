@@ -31,7 +31,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $id = Auth::id();
+        $user = Auth::id();
         $events = $this->fR->getEventsForMainPage();
         $tasks = $this->fR->getTasksForMainPage();
         $tasksDone = $this->fR->getDoneTasksForMainPage();
