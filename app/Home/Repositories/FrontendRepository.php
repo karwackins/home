@@ -12,6 +12,11 @@ namespace App\Home\Repositories;
             ->orderBy('created_at', 'desc')->paginate(10);;
         }
 
+        public function getEventForShow($id)
+        {
+            return Event::findOrFail($id);
+        }
+
         public function getTasksForMainPage()
         {
             return Task::where ('date_task', '<=', date('Y-m-d H:i:s'))->where('status','=',0)->orderBy('priority', 'desc')->get();

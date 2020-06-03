@@ -50,3 +50,10 @@
 </div>
     </div>
 </div>
+@if(Session::has('errors'))
+    <script>
+        $(document).ready(function(){
+            $('#eventModal').modal({show: true});
+        });
+    </script>
+@endif

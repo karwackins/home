@@ -26,6 +26,9 @@
                 <div>
                     @include('tasks.create')
                 </div>
+                <div>
+
+                </div>
             @endif
         </div>
     </div>

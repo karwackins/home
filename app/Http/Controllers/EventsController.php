@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Comment;
 use App\Friend;
 
+use App\Home\Interfaces\FrontendRepositoryInterface;
 use MaddHatter\LaravelFullcalendar\Facades\Calendar;
 use App\Event;
 use App\User;
@@ -14,6 +15,10 @@ use Illuminate\View\View;
 
 class EventsController extends Controller
 {
+    public function __construct(FrontendRepositoryInterface $repository)
+    {
+        $this->fR = $repository;
+    }
 
     /**
      * Display a listing of the resource.
@@ -71,10 +76,9 @@ class EventsController extends Controller
      */
     public function show($id)
     {
-        $event = Event::with('comments')->findOrFail($id)->orderBy('created_at', 'desc')->paginate(10);
-        dd($event);
-//        $comments = Comment::where('post_id', $id)->get();
+        $event = $this->fR->getEventForShow($id);
         return view('events.show', compact('event'));
+
     }
 
     /**
@@ -118,18 +122,18 @@ class EventsController extends Controller
 
     static function calender()
     {
-        $eventsColorD = [
-            'color' => '#f05050',
-            'url' => 'pass here url and any route',
-        ];
-        $eventsColorP = [
-            'color' => '#f05050',
-            'url' => 'pass here url and any route',
-        ];
         $events = [];
         $data = Event::all();
         if($data->count()) {
             foreach ($data as $key => $value) {
+                $eventsColorD = [
+                    'color' => '#f05050',
+                    'url' => 'events/'.$value->id,
+                ];
+                $eventsColorP = [
+                    'color' => '#f04040',
+                    'url' => 'public/events/'.$value->id,
+                ];
                 $events[] = Calendar::event(
                     $value->title,
                     true,
