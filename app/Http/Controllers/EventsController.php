@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Comment;
 use App\Friend;
+
 use MaddHatter\LaravelFullcalendar\Facades\Calendar;
 use App\Event;
 use App\User;
@@ -13,11 +14,6 @@ use Illuminate\View\View;
 
 class EventsController extends Controller
 {
-
-    public function __construct()
-    {
-//        $this->middleware('post_permission',['except' => ['show', 'store']]);
-    }
 
     /**
      * Display a listing of the resource.
@@ -122,6 +118,14 @@ class EventsController extends Controller
 
     static function calender()
     {
+        $eventsColorD = [
+            'color' => '#f05050',
+            'url' => 'pass here url and any route',
+        ];
+        $eventsColorP = [
+            'color' => '#f05050',
+            'url' => 'pass here url and any route',
+        ];
         $events = [];
         $data = Event::all();
         if($data->count()) {
@@ -132,11 +136,7 @@ class EventsController extends Controller
                     new \DateTime($value->start_date),
                     new \DateTime($value->end_date.' +1 day'),
                     null,
-                    // Add color and link on event
-                    [
-                        'color' => '#f05050',
-                        'url' => 'pass here url and any route',
-                    ]
+                    Auth::id()==1?$eventsColorD:$eventsColorP
                 );
             }
         }

@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Home\Interfaces\FrontendRepositoryInterface;
+use App\Home\Repositories\FrontendRepository;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\DB;
 
@@ -14,7 +16,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->bind(FrontendRepositoryInterface::class, function(){
+            return new FrontendRepository;
+        });
     }
 
     /**
