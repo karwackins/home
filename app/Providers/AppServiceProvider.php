@@ -6,6 +6,7 @@ use App\Home\Interfaces\FrontendRepositoryInterface;
 use App\Home\Repositories\FrontendRepository;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\DB;
+use  Illuminate\Support\Facades\Schema;
 
 class AppServiceProvider extends ServiceProvider
 {
