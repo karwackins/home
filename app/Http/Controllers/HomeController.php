@@ -38,6 +38,6 @@ class HomeController extends Controller
 
         $calendar = EventsController::calender();
 
-        return view('home', compact('user', 'posts', 'events','eventsHot', 'tasks', 'tasksDone', 'calendar'));
+        return view('home', compact('user', 'events', 'tasks', 'tasksDone', 'calendar'));
     }
 }
