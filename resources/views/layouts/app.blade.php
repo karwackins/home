@@ -12,6 +12,7 @@
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('js/myjsfile.js') }}"></script>
+    <script src="{{ asset('js/datatable.js') }}"></script>
     <script src="{{ asset('js/moment.js') }}"></script>
     <script src="{{ asset('js/fullcalendar.js') }}"></script>
     <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>

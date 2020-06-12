@@ -1,6 +1,7 @@
 <?php
 namespace App\Home\Repositories;
 
+    use App\Budget;
     use App\Event;
     use App\Home\Interfaces\FrontendRepositoryInterface;
     use App\Task;
@@ -25,5 +26,15 @@ namespace App\Home\Repositories;
         public function getDoneTasksForMainPage()
         {
             return  Task::where ('updated_at', 'like', date('Y-m-d').'%')->where('status','=',1)->get();
+        }
+
+        public function getExpense($id)
+        {
+            return Budget::where('mounth','=',$id)->get();
+        }
+
+        public function setExpence($expence)
+        {
+            // TODO: Implement setExpance() method.
         }
     }

@@ -9,4 +9,10 @@ namespace App\Home\Interfaces;
         public function getTasksForMainPage();
 
         public function getDoneTasksForMainPage();
+
+        public function getExpense($id);
+
+//        public function setBudgetForMounth($budget);
+
+        public function setExpence($expence);
     }

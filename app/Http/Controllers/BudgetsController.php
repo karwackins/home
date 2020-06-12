@@ -2,10 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Budget;
+use App\Home\Interfaces\FrontendRepositoryInterface;
+use App\Home\Repositories\FrontendRepository;
 use Illuminate\Http\Request;
+use JsonSerializable;
 
 class BudgetsController extends Controller
 {
+    public function __construct(FrontendRepositoryInterface $repository)
+    {
+        $this->fR = $repository;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +23,12 @@ class BudgetsController extends Controller
     public function index()
     {
         $month = date("m");
-        return view('budgets.index', compact('month'));
+
+        foreach ($this->fR->getExpense($month) as $expenses)
+        {
+            $expenses = json_decode($expenses->expense);
+        }
+        return view('budgets.index', compact('month', 'expenses'));
     }
 
     /**
@@ -35,7 +49,30 @@ class BudgetsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $expense = [];
+        foreach($request->name as $nkey => $n)
+        {
+            foreach ($request->expense as $ekey => $e)
+            {
+                if($nkey == $ekey)
+                {
+                    $expense[] = array(
+                        'name' => $n,
+                        'expense' => $e,
+                        'status' => 0
+                    );
+                }
+            }
+        }
+
+        $budget = Budget::create([
+                'mounth' => date('m'),
+                'year' => date('Y'),
+                'expense' => json_encode($expense),
+        ]);
+        $budget->save();
+
+//        return back();
     }
 
     /**
@@ -46,8 +83,8 @@ class BudgetsController extends Controller
      */
     public function show($id)
     {
-        $month = $id;
-        return view('budgets.show', compact('month'));
+
+        return view('budgets.index', compact('month', 'expense'));
     }
 
     /**
@@ -70,7 +107,8 @@ class BudgetsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+        dd($request);
     }
 
     /**

@@ -1,5 +1,4 @@
-
-    <div class="container">
+ <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card text-center">
@@ -21,7 +20,7 @@
                                 <a class="nav-link active" href="{{ url('budget/5') }}">Maj</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link active" href="{{ url('budget/6') }}">Czerwiec</a>
+                                <a class="nav-link active" href="{{ url('budget/06') }}">Czerwiec</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link active" href="{{ url('budget/7') }}">Lipiec</a>
