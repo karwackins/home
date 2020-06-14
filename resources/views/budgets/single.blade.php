@@ -4,20 +4,20 @@
     <p class="card-text"></p>
 </div>
 @include('budgets.create')
-<form action="{{url('budget/'.$month)}}" method="POST">
-    {{csrf_field()}}
-    {{method_field('PATCH')}}
     <table class="table">
-        @foreach($expenses as $expense)
-            <tr>
-                <td><input type="text" name="name[]" class="form-control"  value="{{$expense->name}}"></td>
-                <td><input type="text" name="expense[]" class="form-control"  value="{{$expense->expense}}"></td>
-                <input type="hidden" name="status[]" value="0">
-                <td><input type="checkbox" name="status[]" id="{{$expense->name}}" ></td>
-            </tr>
-        @endforeach
+        @if(isset($expenses))
+            @foreach($expenses as $expense)
+                <form action="{{url('budget/'.$expense->id)}}" method="POST">
+                    {{csrf_field()}}
+                    {{method_field('PATCH')}}
+                    <tr>
+                        <td><input type="text" name="name" class="form-control"  value="{{$expense->name}}" ></td>
+                        <td><input type="text" name="amount" class="form-control"  value="{{$expense->amount}}" ></td>
+                        <td><input type="submit" name="status" class="btn btn-sm {{$expense->status==1?'btn-success':'btn-danger'}}" value="{{$expense->status==1?'Tak':'Nie'}}" ></td>
+                    </tr>
+                </form>
+            @endforeach
+        @endif
     </table>
-    <input type="submit" class="btn btn-outline-purple" name="" id="" value="Aktualizuj">
-</form>
 
 

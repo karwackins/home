@@ -2,15 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Budget;
-use App\Http\Controllers\ConstExpenses;
+use App\ConstExpense;
 use App\Home\Interfaces\FrontendRepositoryInterface;
-use App\Home\Repositories\FrontendRepository;
 use Illuminate\Http\Request;
-use JsonSerializable;
-use Illuminate\Support\Facades\Session;
 
-class BudgetsController extends Controller
+class ConstExpenses extends Controller
 {
     public function __construct(FrontendRepositoryInterface $repository)
     {
@@ -24,10 +20,7 @@ class BudgetsController extends Controller
      */
     public function index()
     {
-        $month = date("m");
-        $expenses = $this->fR->getConstExpense($month);
-
-        return view('budgets.index', compact('month', 'expenses'));
+        //
     }
 
     /**
@@ -48,35 +41,7 @@ class BudgetsController extends Controller
      */
     public function store(Request $request)
     {
-        if(isset($request->nameC))
-        {
-            foreach ($request->nameC as $item => $v)
-            {
-                $expenseC[] = array(
-                    'name' => $request->nameC[$item],
-                    'mounth' => date("m"),
-                    'year' => date("y"),
-                    'amount' => $request->amountC[$item],
-                );
-            }
-            $this->fR->setConstExpense($expenseC);
-        }
-
-        if(isset($request->nameP))
-        {
-            foreach ($request->nameP as $item => $v)
-            {
-                $expenseP[] = array(
-                    'name' => $request->nameP[$item],
-                    'mounth' => date("m"),
-                    'year' => date("y"),
-                    'amount' => $request->amountP[$item],
-                );
-            }
-            $this->fR->setPlanExpense($expenseP);
-        }
-
-        return back();
+        ConstExpense::create($request);
     }
 
     /**
@@ -87,8 +52,7 @@ class BudgetsController extends Controller
      */
     public function show($id)
     {
-
-        return view('budgets.index', compact('month', 'expense'));
+        //
     }
 
     /**
@@ -99,7 +63,7 @@ class BudgetsController extends Controller
      */
     public function edit($id)
     {
-
+        //
     }
 
     /**
@@ -111,8 +75,7 @@ class BudgetsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->fR->setConstExpenseForUpdate($request, $id);
-        return redirect()->route('budget.index');
+        //
     }
 
     /**

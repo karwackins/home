@@ -5,6 +5,8 @@ namespace App\Home\Repositories;
     use App\Event;
     use App\Home\Interfaces\FrontendRepositoryInterface;
     use App\Task;
+    use App\ConstExpense;
+    use App\PlanExpense;
 
     class FrontendRepository implements FrontendRepositoryInterface{
         public function getEventsForMainPage()
@@ -28,13 +30,36 @@ namespace App\Home\Repositories;
             return  Task::where ('updated_at', 'like', date('Y-m-d').'%')->where('status','=',1)->get();
         }
 
-        public function getExpense($id)
+        public function getConstExpense($id)
         {
-            return Budget::where('mounth','=',$id)->get();
+            return ConstExpense::where('mounth','=',$id)->get();
         }
 
-        public function setExpence($expence)
+        public function setConstExpense($expence)
         {
-            // TODO: Implement setExpance() method.
+            foreach ($expence as $exp) {
+                $e = ConstExpense::create($exp);
+                $e->save();
+            }
+        }
+
+        public function setConstExpenseForUpdate($expence, $id)
+        {
+            $expence->status=='Tak'?$status=0:$status=1;
+
+            ConstExpense::where('id',$id)->update([
+                'name' => $expence->name,
+                'amount' => $expence->amount,
+                'status' => $status
+            ]);
+
+        }
+
+        public function setPlanExpense($expence)
+        {
+            foreach ($expence as $exp) {
+                $e = PlanExpense::create($exp);
+                $e->save();
+            }
         }
     }

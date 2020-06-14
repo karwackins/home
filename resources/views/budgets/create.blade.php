@@ -30,7 +30,45 @@
 {{--                    </div>--}}
                     <div class="row">
                         <div class="container">
-                            <table id="myTable" class=" table order-list">
+                            <div>
+                                <label for="">Stałe wydatki</label>
+                                <table id="myTable" class=" table order-list-const">
+                                    <thead>
+                                    <tr>
+                                        <td>Wydatek</td>
+                                        <td>Kwota</td>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    @if(Session::has('message'))
+                                        <p class="alert alert-info">{{ Session::get('message') }}</p>
+                                    @endif
+{{--                                    <tr>--}}
+{{--                                        <td style="width: 50%">--}}
+{{--                                            <input type="text" name="nameC[]" class="form-control" placeholder="Wydatek" />--}}
+{{--                                        </td>--}}
+{{--                                        <td style="width: 40%">--}}
+{{--                                            <input type="text" name="amountC[]"  class="form-control" placeholder="0.00 zł"/>--}}
+{{--                                        </td>--}}
+{{--                                        <td style="width: 10%"><a class="deleteRow"></a>--}}
+
+{{--                                        </td>--}}
+{{--                                    </tr>--}}
+                                    </tbody>
+                                    <tfoot>
+                                    <tr>
+                                        <td colspan="5" style="text-align: left;">
+                                            <input type="button" class="btn btn-outline-dark-green btn-lg btn-block " id="addrowConstExp" value="Dodaj wydatek" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                    </tr>
+                                    </tfoot>
+                                </table>
+                        </div>
+                        <div>
+                            <label for="">Planowane wydatki</label>
+                            <table id="myTable" class=" table order-list-plan">
                                 <thead>
                                 <tr>
                                     <td>Wydatek</td>
@@ -38,28 +76,19 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td style="width: 50%">
-                                        <input type="text" name="name[]" class="form-control" placeholder="Wydatek" />
-                                    </td>
-                                    <td style="width: 40%">
-                                        <input type="text" name="expense[]"  class="form-control" placeholder="0.00 zł"/>
-                                    </td>
-                                    <td style="width: 10%"><a class="deleteRow"></a>
 
-                                    </td>
-                                </tr>
                                 </tbody>
                                 <tfoot>
                                 <tr>
                                     <td colspan="5" style="text-align: left;">
-                                        <input type="button" class="btn btn-lg btn-block " id="addrow" value="Add Row" />
+                                        <input type="button" class="btn btn-outline-dark-green btn-lg btn-block " id="addrowPlanExp" value="Dodaj wydatek" />
                                     </td>
                                 </tr>
                                 <tr>
                                 </tr>
                                 </tfoot>
                             </table>
+                        </div>
                         </div>
                     </div>
                     <div class="row form-group">

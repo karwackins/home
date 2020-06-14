@@ -1,33 +1,43 @@
 $(document).ready(function () {
     var counter = 0;
 
-    $("#addrow").on("click", function () {
+    $("#addrowConstExp").on("click", function () {
         var newRow = $("<tr>");
         var cols = "";
-
-        cols += '<td><input type="text" class="form-control" name="name[]"/></td>';
-        cols += '<td><input type="text" class="form-control" name="expense[]"/></td>';
+        cols += '<td><input type="text" class="form-control" name="nameC[]"/></td>';
+        cols += '<td><input type="text" class="form-control" name="amountC[]"/></td>';
 
         cols += '<td><input type="button" class="ibtnDel btn btn-md btn-danger "  value="Delete"></td>';
         newRow.append(cols);
-        $("table.order-list").append(newRow);
+        $("table.order-list-const").append(newRow);
     });
 
+    $("#addrowPlanExp").on("click", function () {
+        var newRow = $("<tr>");
+        var cols = "";
 
+        cols += '<td><input type="text" class="form-control" name="nameP[]"/></td>';
+        cols += '<td><input type="text" class="form-control" name="amountP[]"/></td>';
 
-    $("table.order-list").on("click", ".ibtnDel", function (event) {
+        cols += '<td><input type="button" class="ibtnDel btn btn-md btn-danger "  value="Delete"></td>';
+        newRow.append(cols);
+        $("table.order-list-plan").append(newRow);
+    });
+
+    $("table.order-list-const").on("click", ".ibtnDel", function (event) {
         $(this).closest("tr").remove();
         counter -= 1
     });
 
-
+    $("table.order-list-plan").on("click", ".ibtnDel", function (event) {
+        $(this).closest("tr").remove();
+        counter -= 1
+    });
 });
-
 
 
 function calculateRow(row) {
     var price = +row.find('input[name^="price"]').val();
-
 }
 
 function calculateGrandTotal() {
